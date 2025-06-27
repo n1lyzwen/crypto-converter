@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: master-crypto-converter
+  kafka:
+    consumer:
+      group-id: raz-dwa-trzy-group-id
+
+events:
+  topics:
+    market:
+      pricing: pricing-topic
+      availability: availability-topic
+      conversion: conversion-topic
+      conversion-result: conversion-result-topic
