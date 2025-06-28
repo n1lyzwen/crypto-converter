@@ -2,7 +2,6 @@ package com.crypto.conversion.domain;
 
 import lombok.Getter;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Getter
@@ -19,16 +18,23 @@ public class Market {
                 .orElseThrow(() -> {
                     throw new IllegalArgumentException("Invalid marketPrice format. Expected format: base/quote");
                 });
-        base = Objects.requireNonNull(parts[0]);
-        quote = Objects.requireNonNull(parts[1]);
+        base = parts[0].trim();
+        quote = parts[1].trim();
     }
 
     public Market(String base, String quote) {
-        this.base = Objects.requireNonNull(base);
-        this.quote = Objects.requireNonNull(quote);
+        if (base == null || quote == null) {
+            throw new IllegalArgumentException("Base and quote tokens must not be null");
+        }
+        this.base = base.trim();
+        this.quote = quote.trim();
     }
 
     public String name() {
         return String.format(MARKET_NAME_FORMAT, base, quote);
+    }
+
+    public boolean isIdentical() {
+        return base.equals(quote);
     }
 }

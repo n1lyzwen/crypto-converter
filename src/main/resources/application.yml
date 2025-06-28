@@ -2,8 +2,14 @@ spring:
   application:
     name: master-crypto-converter
   kafka:
+    bootstrap-servers: localhost:9092
     consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       group-id: raz-dwa-trzy-group-id
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 events:
   topics:

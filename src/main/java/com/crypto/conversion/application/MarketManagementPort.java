@@ -8,4 +8,8 @@ public interface MarketManagementPort {
 
     void enable(Market market);
 
+    boolean isDisabled(Market market);
+
+    boolean isEnabled(Market market);
+
 }

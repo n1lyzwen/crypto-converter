@@ -1,4 +1,4 @@
-package com.crypto.conversion.infrastructure.message.convertion;
+package com.crypto.conversion.infrastructure.message.conversion;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

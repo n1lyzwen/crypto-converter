@@ -17,6 +17,11 @@ class MongoMarketRepositoryAdapter implements MarketRepository {
     private final MongoMarketAvailabilityRepository marketAvailabilityRepository;
 
     @Override
+    public void removeMarketPrice(Market market) {
+        marketPriceRepository.deleteById(new MarketId(market));
+    }
+
+    @Override
     public void updateMarketPrice(MarketPrice marketPrice) {
         marketPriceRepository.save(MarketPriceDocument.from(marketPrice));
     }
@@ -28,8 +33,8 @@ class MongoMarketRepositoryAdapter implements MarketRepository {
     }
 
     @Override
-    public List<MarketPrice> findMarketPrices(String currency) {
-        return marketPriceRepository.findByBaseOrQuote(currency, currency)
+    public List<MarketPrice> findMarketPrices(String token) {
+        return marketPriceRepository.findByBaseOrQuote(token, token)
                 .stream()
                 .map(MarketPriceDocument::toMarketPrice)
                 .toList();
@@ -47,8 +52,6 @@ class MongoMarketRepositoryAdapter implements MarketRepository {
         marketAvailabilityRepository.save(new MarketAvailabilityDocument(id, true));
     }
 
-    // Odczyt czy jest rynek włączony w przypadku braku należy do warstwy aplikacji.
-    // Nie do końca wiem co można i co nie można przy enabled/disabled więc zostawiam bez użycia - dla uproszczenia.
     @Override
     public Optional<Boolean> isMarketEnabled(Market market) {
         return marketAvailabilityRepository.findById(new MarketId(market))

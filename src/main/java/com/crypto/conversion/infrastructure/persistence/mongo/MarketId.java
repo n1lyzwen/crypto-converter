@@ -26,12 +26,13 @@ class MarketId {
     }
 
     private String composeMarketId(String base, String quote) {
-        String firstInAlphabeticalOrder = base;
-        String secondInAlphabeticalOrder = quote;
-        if (base.compareTo(quote) > 0) {
-            firstInAlphabeticalOrder = quote;
-            secondInAlphabeticalOrder = base;
+        if (base == null || quote == null) {
+            throw new IllegalArgumentException("Base and quote must not be null");
         }
-        return String.format(MARKET_ID_FORMAT, firstInAlphabeticalOrder, secondInAlphabeticalOrder);
+        if (base.compareTo(quote) <= 0) {
+            return String.format(MARKET_ID_FORMAT, base, quote);
+        } else {
+            return String.format(MARKET_ID_FORMAT, quote, base);
+        }
     }
 }

@@ -8,11 +8,13 @@ import java.util.Optional;
 
 public interface MarketRepository {
 
+    void removeMarketPrice(Market market);
+
     void updateMarketPrice(MarketPrice marketPrice);
 
     Optional<MarketPrice> findMarketPrice(Market market);
 
-    List<MarketPrice> findMarketPrices(String currency);
+    List<MarketPrice> findMarketPrices(String token);
 
     void switchOff(Market market);
 

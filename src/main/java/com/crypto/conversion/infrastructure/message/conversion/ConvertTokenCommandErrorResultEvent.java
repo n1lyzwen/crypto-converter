@@ -1,4 +1,4 @@
-package com.crypto.conversion.infrastructure.message.marketprice;
+package com.crypto.conversion.infrastructure.message.conversion;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,8 +12,8 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-class MarketPriceChangeEvent {
+class ConvertTokenCommandErrorResultEvent {
     private String market;
-    private BigDecimal price;
+    private BigDecimal amount;
     private UUID correlationId;
 }
