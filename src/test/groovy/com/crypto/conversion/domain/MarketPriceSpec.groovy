@@ -47,4 +47,22 @@ class MarketPriceSpec extends Specification {
         result.totalPrice == 10G
         result.marketPrice.market.name() == "BTC/USDT"
     }
+
+    def "should rescale price down"() {
+        given:
+        def market = new Market("BTC/USDT")
+        def marketPrice = new MarketPrice(market, 2.52345)
+
+        expect:
+        marketPrice.price == 2.5234
+    }
+
+    def "should rescale price up"() {
+        given:
+        def market = new Market("BTC/USDT")
+        def marketPrice = new MarketPrice(market, 2.52346)
+
+        expect:
+        marketPrice.price == 2.5235
+    }
 }
